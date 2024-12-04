@@ -1,0 +1,27 @@
+<div class="container">
+  <h2>Listado de Alumnos</h2>
+  <mat-table [dataSource]="alumnos">
+    <ng-container matColumnDef="nombre">
+      <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+      <mat-cell *matCellDef="let alumno"> {{ alumno.nombre }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="apellido">
+      <mat-header-cell *matHeaderCellDef> Apellido </mat-header-cell>
+      <mat-cell *matCellDef="let alumno"> {{ alumno.apellido }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="correo">
+      <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
+      <mat-cell *matCellDef="let alumno"> {{ alumno.correo }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="telefono">
+      <mat-header-cell *matHeaderCellDef> Teléfono </mat-header-cell>
+      <mat-cell *matCellDef="let alumno"> {{ alumno.telefono }} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
