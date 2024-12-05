@@ -1,56 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-revisor-de-propuestas',
   templateUrl: './revisor-de-propuestas.component.html',
   styleUrls: ['./revisor-de-propuestas.component.css']
 })
-export class RevisorDePropuestasComponent implements OnInit {
+export class RevisorDePropuestasComponent {
+  displayedColumns: string[] = ['nombre', 'gestor', 'estado', 'acciones'];
+  propuestas: any[] = JSON.parse(localStorage.getItem('propuestas') || '[]');
+  mensaje: string = ''; // Mensaje dinámico para errores o confirmaciones
 
-  // Lista de propuestas
-  propuestas: any[] = [];
+  constructor() {}
 
-  // Datos de la nueva propuesta
-  nuevaPropuesta: any = { propuesta: '', gestor: '', estado: '' };
-
-  // Mensaje de error
-  mensaje: string = '';
-
-  gestores: any[] = [];
-
-  constructor() { }
-
-  ngOnInit(): void {
-    // Cargar las propuestas desde el localStorage
-    this.propuestas = JSON.parse(localStorage.getItem('propuestas') || '[]');
-    // Cargar los gestores desde el localStorage
-    this.gestores = JSON.parse(localStorage.getItem('gestores') || '[]');
-  }
-
-  // Agregar una nueva propuesta
-  agregarPropuesta() {
-    if (!this.nuevaPropuesta.propuesta || !this.nuevaPropuesta.gestor || !this.nuevaPropuesta.estado) {
-      this.mensaje = 'Por favor, complete todos los campos.';
+  agregarPropuesta(propuesta: any): void {
+    if (!propuesta.nombre || !propuesta.gestor || !propuesta.estado) {
+      this.mostrarMensaje('Por favor, complete todos los campos de la propuesta.');
       return;
     }
-
-    // Asignar un ID único
-    this.nuevaPropuesta.id = this.propuestas.length + 1;
-
-    // Agregar la nueva propuesta
-    this.propuestas.push({ ...this.nuevaPropuesta });
-
-    // Guardar la lista de propuestas en el localStorage
-    localStorage.setItem('propuestas', JSON.stringify(this.propuestas));
-
-    // Limpiar los campos
-    this.nuevaPropuesta = { propuesta: '', gestor: '', estado: '' };
-    this.mensaje = '';
+    this.propuestas.push(propuesta);
+    this.actualizarLocalStorage();
+    this.mostrarMensaje('Propuesta agregada exitosamente.');
   }
 
-  // Eliminar una propuesta
-  eliminarPropuesta(id: number) {
-    this.propuestas = this.propuestas.filter(propuesta => propuesta.id !== id);
+  eliminarPropuesta(index: number): void {
+    if (confirm('¿Está seguro de que desea eliminar esta propuesta?')) {
+      this.propuestas.splice(index, 1);
+      this.actualizarLocalStorage();
+      this.mostrarMensaje('Propuesta eliminada correctamente.');
+    }
+  }
+
+  mostrarMensaje(mensaje: string): void {
+    this.mensaje = mensaje;
+    setTimeout(() => (this.mensaje = ''), 5000); // Limpia el mensaje después de 5 segundos
+  }
+
+  actualizarLocalStorage(): void {
     localStorage.setItem('propuestas', JSON.stringify(this.propuestas));
   }
 }
