@@ -1,26 +1,50 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { AlumnoDialogComponent } from './alumno-dialog/alumno-dialog.component'; // Crear el componente de diálogo
+import { Alumno } from '../../models/alumno.model'; // Asegúrate de tener un modelo para los alumnos
 
 @Component({
   selector: 'app-alumnos',
   templateUrl: './alumnos.component.html',
   styleUrls: ['./alumnos.component.css']
 })
-export class AlumnosComponent implements OnInit {
+export class AlumnosComponent {
+  alumnos: Alumno[] = []; // Aquí deberías cargar tus datos, por ejemplo, desde un servicio
+  displayedColumns: string[] = ['nombre', 'apellido', 'correo', 'estado', 'acciones'];
 
-  // Datos de ejemplo que representarán a los alumnos
-  alumnos = [
-    { nombre: 'Juan', apellido: 'Pérez', correo: 'juan.perez@gmail.com', telefono: '1234567890' },
-    { nombre: 'Ana', apellido: 'Gómez', correo: 'ana.gomez@yahoo.com', telefono: '0987654321' },
-    { nombre: 'Carlos', apellido: 'Martínez', correo: 'carlos.martinez@hotmail.com', telefono: '1122334455' }
-  ];
+  constructor(public dialog: MatDialog) {}
 
-  // Definir las columnas que se mostrarán en la tabla
-  displayedColumns: string[] = ['nombre', 'apellido', 'correo', 'telefono'];
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AlumnoDialogComponent, {
+      width: '400px',
+      data: {} // Aquí pasarías los datos si estás editando un alumno
+    });
 
-  constructor() { }
-
-  ngOnInit(): void {
-    // Aquí se pueden realizar tareas de inicialización si es necesario
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Aquí manejarías el resultado, por ejemplo, agregando el nuevo alumno a la lista
+        this.alumnos.push(result);
+      }
+    });
   }
 
+  editarAlumno(alumno: Alumno): void {
+    const dialogRef = this.dialog.open(AlumnoDialogComponent, {
+      width: '400px',
+      data: alumno // Pasar los datos del alumno para editarlos
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Aquí actualizarías el alumno en la lista
+        const index = this.alumnos.findIndex(a => a.id === result.id);
+        this.alumnos[index] = result;
+      }
+    });
+  }
+
+  eliminarAlumno(id: number): void {
+    // Aquí eliminarías el alumno, probablemente llamando a un servicio
+    this.alumnos = this.alumnos.filter(alumno => alumno.id !== id);
+  }
 }
