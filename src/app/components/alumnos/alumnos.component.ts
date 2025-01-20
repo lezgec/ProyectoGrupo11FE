@@ -24,6 +24,7 @@ export class AlumnosComponent {
       if (result) {
         // Aquí manejarías el resultado, por ejemplo, agregando el nuevo alumno a la lista
         this.alumnos.push(result);
+      this.alumnos = [...this.alumnos];
       }
     });
   }
