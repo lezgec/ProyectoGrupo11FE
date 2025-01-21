@@ -8,7 +8,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class GestorDialogComponent {
 
-  nuevoGestor: any = { nombre: '', apellido: '', correo: '', telefono: '' };
+  nuevoGestor: any = { nombre: '', apellidos: '', correo: '', telefono: '' };
 
   constructor(
     public dialogRef: MatDialogRef<GestorDialogComponent>,
@@ -20,7 +20,7 @@ export class GestorDialogComponent {
   }
 
   guardarGestor(): void {
-    if (!this.nuevoGestor.nombre || !this.nuevoGestor.apellido || !this.nuevoGestor.correo || !this.nuevoGestor.telefono) {
+    if (!this.nuevoGestor.nombre || !this.nuevoGestor.apellidos || !this.nuevoGestor.correo || !this.nuevoGestor.telefono) {
       return; // No guardamos si hay campos vacíos
     }
 

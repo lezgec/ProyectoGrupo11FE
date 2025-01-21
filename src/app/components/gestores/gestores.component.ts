@@ -22,10 +22,7 @@ export class GestoresComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         // Validación de campos
-        if (!result.nombre || !result.apellidos || !result.telefono || !result.correo) {
-          this.mostrarMensaje('Por favor, complete todos los campos antes de guardar.');
-          return;
-        }
+
 
         // Validación de formato de correo
         if (!this.validarCorreo(result.correo)) {
@@ -41,6 +38,7 @@ export class GestoresComponent {
 
         // Guardar gestor en la lista
         this.gestores.push(result);
+        this.gestores = [...this.gestores];
         this.actualizarLocalStorage();
         this.mostrarMensaje('Gestor guardado exitosamente.');
       }
