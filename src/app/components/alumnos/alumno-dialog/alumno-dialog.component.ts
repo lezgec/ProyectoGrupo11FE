@@ -13,7 +13,7 @@ export class AlumnoDialogComponent {
   ) {}
 
   onCancel(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(null);
   }
 
   onSubmit(): void {

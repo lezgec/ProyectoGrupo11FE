@@ -13,7 +13,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import { MatSort, MatSortModule} from '@angular/material/sort';
 
 import { AlumnosComponent } from './components/alumnos/alumnos.component';
 import { RevisorDePropuestasComponent } from './components/revisor-de-propuestas/revisor-de-propuestas.component';
@@ -22,6 +25,7 @@ import { GestoresComponent } from './components/gestores/gestores.component';
 import { SecretariaComponent } from './components/secretaria/secretaria.component';
 import { GestorDialogComponent } from './components/gestores/gestor-dialog/gestor-dialog.component';
 import { AlumnoDialogComponent } from './components/alumnos/alumno-dialog/alumno-dialog.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,9 @@ import { AlumnoDialogComponent } from './components/alumnos/alumno-dialog/alumno
     GestoresComponent,
     SecretariaComponent,
     GestorDialogComponent,
-    AlumnoDialogComponent
+    AlumnoDialogComponent,
+    HomeComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -47,7 +53,11 @@ import { AlumnoDialogComponent } from './components/alumnos/alumno-dialog/alumno
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSidenavModule,
+    MatListModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

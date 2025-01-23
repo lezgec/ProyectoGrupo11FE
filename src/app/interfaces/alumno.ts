@@ -9,6 +9,6 @@ export interface Alumno{
   propuestaDefinicion: string,
   isDeleted: boolean,
   deletedAt: Date,
-  propuestas: []
+  propuestas?: []
 
 }

@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'coordinador-de-revision', component: CoordinadorDeRevisionComponent },
   { path: 'gestores', component: GestoresComponent },
   { path: 'secretaria', component: SecretariaComponent },
-  { path: '', redirectTo: '/alumnos', pathMatch: 'full' }
+  { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
 

@@ -1,10 +1,44 @@
-<mat-toolbar color="primary">
-  <span>Gestión de Propuestas</span>
-  <span class="spacer"></span>
-  <button mat-button routerLink="/alumnos">Alumnos</button>
-  <button mat-button routerLink="/revisor-de-propuestas">Revisor de Propuestas</button>
-  <button mat-button routerLink="/coordinador-de-revision">Coordinador de Revisión</button>
-  <button mat-button routerLink="/gestores">Gestores</button>
-  <button mat-button routerLink="/secretaria">Secretaria</button>
-</mat-toolbar>
-<router-outlet></router-outlet>
+<mat-sidenav-container autosize>
+  <mat-sidenav [mode]="isMobile ? 'over' : 'side'" [opened]="isMobile ? 'false' : 'true'">
+    <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    
+    <mat-nav-list>
+      <a mat-list-item routerLink="/alumnos"> 
+        <span class="entry">
+        <mat-icon>house</mat-icon>
+        <span>Alumnos</span>
+      </span>
+      </a>
+      <a mat-list-item routerLink="/revisor-de-propuestas">
+        <span class="entry">
+        <mat-icon>my_library_books</mat-icon>
+        <span>Revisor de Propuestas</span>
+      </span>
+      </a>
+      <a mat-list-item routerLink="/coordinador-de-revision">
+        <span class="entry">
+        <mat-icon>person</mat-icon>
+        <span>Coordinador de Revisión</span>
+      </span>
+      </a>
+      <a mat-list-item routerLink="/gestores">
+        <span class="entry">
+        <mat-icon>person</mat-icon>
+        <span>Gestores</span>
+      </span>
+      </a>
+      <a mat-list-item routerLink="/secretaria">
+        <span class="entry">
+        <mat-icon>person</mat-icon>
+        <span>Secretaria</span>
+      </span>
+      </a>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
