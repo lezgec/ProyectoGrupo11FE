@@ -1,4 +1,4 @@
-export interface Gestor {
+export interface IGestor {
   id: number;
   nombre: string;
   apellido: string;

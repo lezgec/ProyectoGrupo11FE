@@ -2,13 +2,14 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-gestor-dialog',
-  templateUrl: './gestor-dialog.component.html',
-  styleUrls: ['./gestor-dialog.component.css']
+  selector: 'app-secretaria-dialog',
+  templateUrl: './secretaria-dialog.component.html',
+  styleUrls: ['./secretaria-dialog.component.css']
 })
-export class GestorDialogComponent {
+
+export class SecretariaDialogComponent {
   constructor(
-    public dialogRef: MatDialogRef<GestorDialogComponent>,
+    public dialogRef: MatDialogRef<SecretariaDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any // Recibe los datos del alumno si es edición
   ) {}
 

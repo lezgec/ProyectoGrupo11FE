@@ -15,8 +15,11 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import { MatSort, MatSortModule} from '@angular/material/sort';
+import { MatPaginatorModule} from '@angular/material/paginator';
+import { MatSortModule} from '@angular/material/sort';
+import { MatDividerModule} from '@angular/material/divider';
+import { MatCardModule} from '@angular/material/card';
+import { MatTreeModule} from '@angular/material/tree';
 
 import { AlumnosComponent } from './components/alumnos/alumnos.component';
 import { RevisorDePropuestasComponent } from './components/revisor-de-propuestas/revisor-de-propuestas.component';
@@ -26,6 +29,8 @@ import { SecretariaComponent } from './components/secretaria/secretaria.componen
 import { GestorDialogComponent } from './components/gestores/gestor-dialog/gestor-dialog.component';
 import { AlumnoDialogComponent } from './components/alumnos/alumno-dialog/alumno-dialog.component';
 import { HomeComponent } from './home/home.component';
+import { SecretariaDialogComponent } from './components/secretaria/secretaria-dialog/secretaria-dialog.component';
+import { RevisoresDialogComponent } from './components/revisor-de-propuestas/revisores-dialog/revisores-dialog.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +43,8 @@ import { HomeComponent } from './home/home.component';
     GestorDialogComponent,
     AlumnoDialogComponent,
     HomeComponent,
+    SecretariaDialogComponent,
+    RevisoresDialogComponent,
 
   ],
   imports: [
@@ -58,6 +65,11 @@ import { HomeComponent } from './home/home.component';
     MatListModule,
     MatPaginatorModule,
     MatSortModule,
+    MatDividerModule,
+    MatCardModule,
+    MatTreeModule, 
+    MatButtonModule, 
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
