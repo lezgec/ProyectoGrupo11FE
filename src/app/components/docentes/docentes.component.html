@@ -1,8 +1,8 @@
 <div class="mat-app-background basic-container">
-  <h1>Lista de Gestores</h1>
+  <h1>Lista de docentes</h1>
 
 <div class="bar-group">
-  <button mat-raised-button color="primary" (click)="openDialog()">Agregar Gestor</button>
+  <button mat-raised-button color="primary" (click)="openDialog()">Agregar docentes</button>
   <mat-form-field class="example-full-width">
     <input matInput (keyup)="applyFilter($event)" placeholder="Filtrar" #input>
   </mat-form-field>
@@ -11,47 +11,47 @@
   <!-- Columna ID -->
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef> ID </th>
-    <td mat-cell *matCellDef="let gestor"> {{ gestor.id }} </td>
+    <td mat-cell *matCellDef="let docente"> {{ docente.id }} </td>
   </ng-container>
 
   <!-- Columna Nombre -->
   <ng-container matColumnDef="nombre">
     <th mat-header-cell *matHeaderCellDef> Nombre </th>
-    <td mat-cell *matCellDef="let gestor"> {{ gestor.nombre }} </td>
+    <td mat-cell *matCellDef="let docente"> {{ docente.nombre }} </td>
   </ng-container>
 
   <!-- Columna Apellido -->
   <ng-container matColumnDef="apellido">
     <th mat-header-cell *matHeaderCellDef> Apellido </th>
-    <td mat-cell *matCellDef="let gestor"> {{ gestor.apellido }} </td>
+    <td mat-cell *matCellDef="let docente"> {{ docente.apellido }} </td>
   </ng-container>
 
   <!-- Columna Correo -->
   <ng-container matColumnDef="correo">
     <th mat-header-cell *matHeaderCellDef> Correo </th>
-    <td mat-cell *matCellDef="let gestor"> {{ gestor.correo }} </td>
+    <td mat-cell *matCellDef="let docente"> {{ docente.correo }} </td>
   </ng-container>
 
   <!-- Columna Correo -->
   <ng-container matColumnDef="telefono">
     <th mat-header-cell *matHeaderCellDef> telefono </th>
-    <td mat-cell *matCellDef="let gestor"> {{ gestor.telefono }} </td>
+    <td mat-cell *matCellDef="let docente"> {{ docente.telefono }} </td>
   </ng-container>
 
   <!-- Columna Estado -->
   <ng-container matColumnDef="estado">
     <th mat-header-cell *matHeaderCellDef> Estado </th>
-    <td mat-cell *matCellDef="let gestor"> {{ gestor.estado }} </td>
+    <td mat-cell *matCellDef="let docente"> {{ docente.estado }} </td>
   </ng-container>
 
   <!-- Columna Acciones -->
   <ng-container matColumnDef="acciones">
     <th mat-header-cell *matHeaderCellDef> Acciones </th>
-    <td mat-cell *matCellDef="let gestor">
-      <button mat-icon-button color="primary" (click)="editarGestor(gestor)">
+    <td mat-cell *matCellDef="let docente">
+      <button mat-icon-button color="primary" (click)="editarDocente(docente)">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button color="warn" (click)="eliminarGestor(gestor.id)">
+      <button mat-icon-button color="warn" (click)="eliminarDocente(docente.id)">
         <mat-icon>delete</mat-icon>
       </button>
     </td>

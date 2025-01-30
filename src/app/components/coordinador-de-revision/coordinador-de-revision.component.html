@@ -1,1 +1,79 @@
-<p>coordinador-de-revision works!</p>
+<button mat-raised-button color="primary" (click)="showAsignarPropuestas()">Asignar propuestas</button>
+<button mat-raised-button color="primary" (click)="showGenerarReportes()">Generar Reportes</button>
+
+<!-- Sección de Asignar Propuestas -->
+<div *ngIf="isAsignarPropuestasVisible">
+  <table mat-table [dataSource]="docentes">
+    <!-- Columna para Docentes -->
+    <ng-container matColumnDef="docente">
+      <th mat-header-cell *matHeaderCellDef> Docente </th>
+      <td mat-cell *matCellDef="let docente"> {{ docente.nombre }} </td>
+    </ng-container>
+
+    <!-- Columna para Propuestas -->
+    <ng-container matColumnDef="propuesta">
+      <th mat-header-cell *matHeaderCellDef> Propuesta </th>
+      <td mat-cell *matCellDef="let docente">
+        <mat-select [(value)]="docente.propuesta" placeholder="Seleccionar propuesta">
+          <mat-option *ngFor="let propuesta of propuestas" [value]="propuesta">{{ propuesta.nombre }}</mat-option>
+        </mat-select>
+      </td>
+    </ng-container>
+
+    <!-- Columna para Acciones -->
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <td mat-cell *matCellDef="let docente">
+        <button mat-button color="accent" (click)="editar(docente)">Editar</button>
+        <button mat-button color="primary" (click)="guardar(docente)">Guardar</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+<!-- Sección de Generar Reportes -->
+<div *ngIf="isGenerarReportesVisible">
+  <h3>Reportes</h3>
+  <button mat-raised-button color="primary" (click)="obtenerPropuestasPorDocente()">Lista de Propuestas con Estado</button>
+  <button mat-raised-button color="accent" (click)="obtenerPropuestasConObservaciones()">Propuestas con Observaciones</button>
+
+  <!-- Tabla para mostrar la lista de propuestas con su estado -->
+  <table mat-table [dataSource]="reportesPropuestasDocente" *ngIf="reportesPropuestasDocente.length > 0">
+    <ng-container matColumnDef="docente">
+      <th mat-header-cell *matHeaderCellDef> Docente </th>
+      <td mat-cell *matCellDef="let reporte"> {{ reporte.docente }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="propuesta">
+      <th mat-header-cell *matHeaderCellDef> Propuesta </th>
+      <td mat-cell *matCellDef="let reporte"> {{ reporte.propuesta }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef> Estado </th>
+      <td mat-cell *matCellDef="let reporte"> {{ reporte.estado }} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['docente', 'propuesta', 'estado']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['docente', 'propuesta', 'estado'];"></tr>
+  </table>
+
+  <!-- Tabla para mostrar la lista de propuestas con sus observaciones -->
+  <table mat-table [dataSource]="reportesPropuestasObservaciones" *ngIf="reportesPropuestasObservaciones.length > 0">
+    <ng-container matColumnDef="propuesta">
+      <th mat-header-cell *matHeaderCellDef> Propuesta </th>
+      <td mat-cell *matCellDef="let reporte"> {{ reporte.propuesta }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="observaciones">
+      <th mat-header-cell *matHeaderCellDef> Observaciones </th>
+      <td mat-cell *matCellDef="let reporte"> {{ reporte.observaciones }} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['propuesta', 'observaciones']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['propuesta', 'observaciones'];"></tr>
+  </table>
+</div>

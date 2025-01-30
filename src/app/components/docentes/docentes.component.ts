@@ -1,28 +1,28 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { GestorDialogComponent } from './gestor-dialog/gestor-dialog.component';
+import { DocentesDialogComponent } from './docentes-dialog/docentes-dialog.component';
 import { MatPaginator} from '@angular/material/paginator';
 import { MatSort} from '@angular/material/sort';
 import { MatTableDataSource} from '@angular/material/table';
-import { IGestor } from 'src/app/models/gestor.model';
+import { IDocente } from 'src/app/models/docente.model';
 
 @Component({
-  selector: 'app-gestores',
-  templateUrl: './gestores.component.html',
-  styleUrls: ['./gestores.component.css']
+  selector: 'app-docentes',
+  templateUrl: './docentes.component.html',
+  styleUrls: ['./docentes.component.css']
 })
-export class GestoresComponent {
-  gestores: IGestor[] = []; // Aquí deberías cargar tus datos, por ejemplo, desde un servicio
+export class DocentesComponent {
+  docentes: IDocente[] = []; // Aquí deberías cargar tus datos, por ejemplo, desde un servicio
   displayedColumns: string[] = ['id','nombre', 'apellido', 'correo', 'telefono', 'acciones'];
-  dataSource: MatTableDataSource<IGestor>; // Usaremos MatTableDataSource para manejar los datos
+  dataSource: MatTableDataSource<IDocente>; // Usaremos MatTableDataSource para manejar los datos
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(public dialog: MatDialog) {
-    
-    
-    this.dataSource = new MatTableDataSource(this.gestores);
+
+
+    this.dataSource = new MatTableDataSource(this.docentes);
   }
 
   ngAfterViewInit() {
@@ -31,45 +31,45 @@ export class GestoresComponent {
   }
   // Método para abrir el diálogo y agregar un gestor
   generateUniqueId(): number {
-    return this.gestores.length ? Math.max(...this.gestores.map(a => a.id)) + 1 : 1;
+    return this.docentes.length ? Math.max(...this.docentes.map(a => a.id)) + 1 : 1;
   }
-  
+
   openDialog(): void {
-    const dialogRef = this.dialog.open(GestorDialogComponent, {
+    const dialogRef = this.dialog.open(DocentesDialogComponent, {
       //width: '400px',
       data: { id: this.generateUniqueId() }
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.nombre && result.apellido && result.correo && result.telefono) {
-        this.gestores.push(result);
-        this.dataSource.data = this.gestores; // Actualizar el dataSource
+        this.docentes.push(result);
+        this.dataSource.data = this.docentes; // Actualizar el dataSource
       }
     });
   }
 
   // Método para editar un gestor
-  editarGestor(gestores: IGestor): void {
-    const dialogRef = this.dialog.open(GestorDialogComponent, {
+  editarDocente(docentes: IDocente): void {
+    const dialogRef = this.dialog.open(DocentesDialogComponent, {
       //width: '400px',
-      data: { ...gestores }
+      data: { ...docentes }
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.nombre && result.apellido && result.correo && result.telefono) {
-        const index = this.gestores.findIndex(a => a.id === result.id);
+        const index = this.docentes.findIndex(a => a.id === result.id);
         if (index > -1) {
-          this.gestores[index] = result;
-          this.dataSource.data = this.gestores; // Actualizar el dataSource
+          this.docentes[index] = result;
+          this.dataSource.data = this.docentes; // Actualizar el dataSource
         }
       }
     });
   }
 
   // Método para eliminar un gestor
-  eliminarGestor(id: number): void {
-    this.gestores = this.gestores.filter(gestores => gestores.id !== id);
-    this.dataSource.data = this.gestores; // Actualizar el dataSource
+  eliminarDocente(id: number): void {
+    this.docentes = this.docentes.filter(docentes => docentes.id !== id);
+    this.dataSource.data = this.docentes; // Actualizar el dataSource
   }
 
   // Método para aplicar el filtro

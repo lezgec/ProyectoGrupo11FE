@@ -1,0 +1,65 @@
+<h2>Planificación del Periodo de Titulación</h2>
+
+<form [formGroup]="planificacionForm" (ngSubmit)="onSubmit()">
+  <!-- Ciclo -->
+  <mat-form-field appearance="fill">
+    <mat-label>Ciclo</mat-label>
+    <mat-radio-group formControlName="ciclo">
+      <mat-radio-button value="Ciclo I">Ciclo I</mat-radio-button>
+      <mat-radio-button value="Ciclo II">Ciclo II</mat-radio-button>
+    </mat-radio-group>
+  </mat-form-field>
+
+  <!-- Fecha de inicio de entrega de proyecto -->
+  <mat-form-field appearance="fill">
+    <mat-label>Fecha de Inicio de Entrega de Proyecto</mat-label>
+    <input matInput formControlName="fechaInicioProyecto" type="date" />
+  </mat-form-field>
+
+  <!-- Fecha de fin de entrega de proyecto -->
+  <mat-form-field appearance="fill">
+    <mat-label>Fecha de Fin de Entrega de Proyecto</mat-label>
+    <input matInput formControlName="fechaFinProyecto" type="date" />
+  </mat-form-field>
+
+  <!-- Inicio de Proceso de Tutorías -->
+  <mat-form-field appearance="fill">
+    <mat-label>Inicio de Proceso de Tutorías</mat-label>
+    <input matInput formControlName="fechaInicioTutorias" type="date" />
+  </mat-form-field>
+
+  <!-- Fin de Proceso de Tutorías -->
+  <mat-form-field appearance="fill">
+    <mat-label>Fin de Proceso de Tutorías</mat-label>
+    <input matInput formControlName="fechaFinTutorias" type="date" />
+  </mat-form-field>
+
+  <!-- Inicio de Revisión de Proyectos -->
+  <mat-form-field appearance="fill">
+    <mat-label>Inicio de Revisión de Proyectos</mat-label>
+    <input matInput formControlName="fechaInicioRevision" type="date" />
+  </mat-form-field>
+
+  <!-- Fin de Revisión de Proyectos -->
+  <mat-form-field appearance="fill">
+    <mat-label>Fin de Revisión de Proyectos</mat-label>
+    <input matInput formControlName="fechaFinRevision" type="date" />
+  </mat-form-field>
+
+  <!-- Inicio de Sustentación -->
+  <mat-form-field appearance="fill">
+    <mat-label>Inicio de Sustentación</mat-label>
+    <input matInput formControlName="fechaInicioSustentacion" type="date" />
+  </mat-form-field>
+
+  <!-- Fin de Sustentación -->
+  <mat-form-field appearance="fill">
+    <mat-label>Fin de Sustentación</mat-label>
+    <input matInput formControlName="fechaFinSustentacion" type="date" />
+  </mat-form-field>
+
+  <!-- Botón para enviar -->
+  <button mat-raised-button color="primary" type="submit" [disabled]="!planificacionForm.valid">
+    Registrar Planificación
+  </button>
+</form>
