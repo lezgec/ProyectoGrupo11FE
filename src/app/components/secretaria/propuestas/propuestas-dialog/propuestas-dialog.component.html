@@ -23,7 +23,10 @@
     <mat-form-field appearance="fill">
       <mat-label>Asignar Alumno</mat-label>
       <mat-select [(ngModel)]="data.alumno" name="alumno" required>
-        <mat-option *ngFor="let alumno of alumnos" [value]="alumno.nombre">{{ alumno.nombre }}</mat-option>
+        <mat-option *ngFor="let alumno of alumnos" [value]="alumno.nombre + ' ' + alumno.apellido">
+          {{ alumno.nombre }} {{ alumno.apellido }}
+        </mat-option>
+
       </mat-select>
     </mat-form-field>
 
