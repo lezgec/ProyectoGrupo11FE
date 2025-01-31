@@ -20,31 +20,38 @@ import { MatSortModule} from '@angular/material/sort';
 import { MatDividerModule} from '@angular/material/divider';
 import { MatCardModule} from '@angular/material/card';
 import { MatTreeModule} from '@angular/material/tree';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 import { AlumnosComponent } from './components/alumnos/alumnos.component';
-import { RevisorDePropuestasComponent } from './components/revisor-de-propuestas/revisor-de-propuestas.component';
 import { CoordinadorDeRevisionComponent } from './components/coordinador-de-revision/coordinador-de-revision.component';
-import { GestoresComponent } from './components/gestores/gestores.component';
-import { SecretariaComponent } from './components/secretaria/secretaria.component';
-import { GestorDialogComponent } from './components/gestores/gestor-dialog/gestor-dialog.component';
 import { AlumnoDialogComponent } from './components/alumnos/alumno-dialog/alumno-dialog.component';
-import { HomeComponent } from './home/home.component';
-import { SecretariaDialogComponent } from './components/secretaria/secretaria-dialog/secretaria-dialog.component';
-import { RevisoresDialogComponent } from './components/revisor-de-propuestas/revisores-dialog/revisores-dialog.component';
+import { HomeComponent } from './components/home/home.component';
+import { DocentesComponent } from './components/docentes/docentes.component';
+import { DocentesDialogComponent } from './components/docentes/docentes-dialog/docentes-dialog.component';
+import { SecretariaComponent } from './components/secretaria/secretaria.component';
+import { PlanificacionComponent } from './components/secretaria/planificacion/planificacion.component';
+import { CoordinadorDialogComponent } from './components/coordinador-de-revision/coordinador-dialog/coordinador-dialog.component';
+import { PropuestasComponent } from './components/secretaria/propuestas/propuestas.component';
+import { PropuestasDialogComponent } from './components/secretaria/propuestas/propuestas-dialog/propuestas-dialog.component';
+import { RevisorDePropuestasComponent } from './components/revisor-de-propuestas/revisor-de-propuestas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AlumnosComponent,
-    RevisorDePropuestasComponent,
     CoordinadorDeRevisionComponent,
-    GestoresComponent,
-    SecretariaComponent,
-    GestorDialogComponent,
     AlumnoDialogComponent,
     HomeComponent,
-    SecretariaDialogComponent,
-    RevisoresDialogComponent,
+    DocentesComponent,
+    DocentesDialogComponent,
+    SecretariaComponent,
+    PlanificacionComponent,
+    CoordinadorDialogComponent,
+    PropuestasComponent,
+    PropuestasDialogComponent,
+    RevisorDePropuestasComponent
 
   ],
   imports: [
@@ -67,9 +74,11 @@ import { RevisoresDialogComponent } from './components/revisor-de-propuestas/rev
     MatSortModule,
     MatDividerModule,
     MatCardModule,
-    MatTreeModule, 
-    MatButtonModule, 
+    MatTreeModule,
+    MatButtonModule,
     MatIconModule,
+    MatRadioModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
