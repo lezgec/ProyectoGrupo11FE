@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AlumnosComponent } from './components/alumnos/alumnos.component';
-import { RevisorDePropuestasComponent } from './components/revisor-de-propuestas/revisor-de-propuestas.component';
 import { CoordinadorDeRevisionComponent } from './components/coordinador-de-revision/coordinador-de-revision.component';
-import { GestoresComponent } from './components/gestores/gestores.component';
+import { DocentesComponent } from './components/docentes/docentes.component';
 import { SecretariaComponent } from './components/secretaria/secretaria.component';
+import { RevisorDePropuestasComponent } from './components/revisor-de-propuestas/revisor-de-propuestas.component';
 
 const routes: Routes = [
   { path: 'alumnos', component: AlumnosComponent },
-  { path: 'revisor-de-propuestas', component: RevisorDePropuestasComponent },
+  { path: 'revisor', component: RevisorDePropuestasComponent },
   { path: 'coordinador-de-revision', component: CoordinadorDeRevisionComponent },
-  { path: 'gestores', component: GestoresComponent },
-  { path: 'secretaria', component: SecretariaComponent },
+  { path: 'docentes', component: DocentesComponent },
+  { path: 'secretaria', component:SecretariaComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 

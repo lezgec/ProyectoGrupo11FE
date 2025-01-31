@@ -1,0 +1,54 @@
+.contenido-revision {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.full-width {
+  width: 100%;
+}
+.basic-container {
+  margin: 10px;
+  justify-content: center;
+}
+.bar-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.h1 {
+  justify-self: center !important;
+
+}
+table {
+  border-radius: 20px;
+  outline: 1px solid #00000000;
+
+}
+.mat-paginator {
+  background-color: #ffffff00;
+}
+.mat-mdc-paginator-container {
+  outline: solid #ffffff00;
+  border-radius: 20px;
+}
+.mat-mdc-paginator-outer-container {
+  background-color: #00000000;
+}
+.mat-app-background {
+  background-color: #ffffff00;
+}
+
+.mat-mdc-table {
+  background-color: #ffffff00;
+}
+
+.mat-mdc-paginator {
+  background-color: #ffffff00;
+}
+
+h2 {
+  justify-self: center;
+}

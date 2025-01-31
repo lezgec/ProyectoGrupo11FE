@@ -12,7 +12,13 @@ import { IDocente } from 'src/app/models/docente.model';
   styleUrls: ['./docentes.component.css']
 })
 export class DocentesComponent {
-  docentes: IDocente[] = []; // Aquí deberías cargar tus datos, por ejemplo, desde un servicio
+  docentes: IDocente[] = [
+    { id: 1, nombre: 'Roberto', apellido: 'García', telefono: '0991234567', correo: 'roberto@example.com', rol: 'Revisor' },
+    { id: 2, nombre: 'Ana', apellido: 'Torres', telefono: '0997654321', correo: 'ana@example.com', rol: 'Revisor' },
+    { id: 3, nombre: 'Luis', apellido: 'Fernández', telefono: '0999988776', correo: 'luis@example.com', rol: 'Revisor' },
+    { id: 4, nombre: 'Sofía', apellido: 'Rojas', telefono: '0991112223', correo: 'sofia@example.com', rol: 'Coordinador' },
+    { id: 5, nombre: 'Andrés', apellido: 'Gutiérrez', telefono: '0995554443', correo: 'andres@example.com', rol: 'Revisor' }
+  ]; // Aquí deberías cargar tus datos, por ejemplo, desde un servicio
   displayedColumns: string[] = ['id','nombre', 'apellido', 'correo', 'telefono', 'acciones'];
   dataSource: MatTableDataSource<IDocente>; // Usaremos MatTableDataSource para manejar los datos
 
