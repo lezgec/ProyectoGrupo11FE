@@ -1,90 +1,108 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DocentesDialogComponent } from './docentes-dialog/docentes-dialog.component';
-import { MatPaginator} from '@angular/material/paginator';
-import { MatSort} from '@angular/material/sort';
-import { MatTableDataSource} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { IDocente } from 'src/app/models/docente.model';
+import { DocenteService } from 'src/services/docente.service';
 
 @Component({
   selector: 'app-docentes',
   templateUrl: './docentes.component.html',
   styleUrls: ['./docentes.component.css']
 })
-export class DocentesComponent {
-  docentes: IDocente[] = [
-    { id: 1, nombre: 'Roberto', apellido: 'García', telefono: '0991234567', correo: 'roberto@example.com', rol: 'Revisor' },
-    { id: 2, nombre: 'Ana', apellido: 'Torres', telefono: '0997654321', correo: 'ana@example.com', rol: 'Revisor' },
-    { id: 3, nombre: 'Luis', apellido: 'Fernández', telefono: '0999988776', correo: 'luis@example.com', rol: 'Revisor' },
-    { id: 4, nombre: 'Sofía', apellido: 'Rojas', telefono: '0991112223', correo: 'sofia@example.com', rol: 'Coordinador' },
-    { id: 5, nombre: 'Andrés', apellido: 'Gutiérrez', telefono: '0995554443', correo: 'andres@example.com', rol: 'Revisor' }
-  ]; // Aquí deberías cargar tus datos, por ejemplo, desde un servicio
-  displayedColumns: string[] = ['id','nombre', 'apellido', 'correo', 'telefono', 'acciones'];
-  dataSource: MatTableDataSource<IDocente>; // Usaremos MatTableDataSource para manejar los datos
+export class DocentesComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'cedula', 'nombre', 'apellido', 'correo', 'telefono', 'rol', 'acciones'];
+  dataSource = new MatTableDataSource<IDocente>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private docenteService: DocenteService) {}
 
-
-    this.dataSource = new MatTableDataSource(this.docentes);
+  ngOnInit(): void {
+    this.obtenerDocentes();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  // Método para abrir el diálogo y agregar un gestor
-  generateUniqueId(): number {
-    return this.docentes.length ? Math.max(...this.docentes.map(a => a.id)) + 1 : 1;
+
+  // ✅ Obtener todos los docentes desde el backend
+  obtenerDocentes(): void {
+    this.docenteService.getDocentes().subscribe({
+      next: (docentes) => {
+        this.dataSource.data = docentes;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      error: (error) => console.error('Error al obtener los docentes:', error)
+    });
   }
 
-  openDialog(): void {
+
+  // ✅ Abrir el diálogo para agregar/editar un docente
+  openDialog(docente?: IDocente): void {
+    const isEditMode = !!docente;
     const dialogRef = this.dialog.open(DocentesDialogComponent, {
-      //width: '400px',
-      data: { id: this.generateUniqueId() }
+      width: '400px',
+      data: isEditMode
+        ? { ...docente, isEditMode }
+        : { id: 0, cedula: '', nombre: '', apellido: '', telefono: '', correo: '', rol: '', isEditMode }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result && result.nombre && result.apellido && result.correo && result.telefono) {
-        this.docentes.push(result);
-        this.dataSource.data = this.docentes; // Actualizar el dataSource
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        result.isEditMode ? this.actualizarDocente(result) : this.crearDocente(result);
       }
     });
   }
 
-  // Método para editar un gestor
-  editarDocente(docentes: IDocente): void {
+  // ✅ Crear un nuevo docente
+  crearDocente(docente: IDocente): void {
+    this.docenteService.addDocente(docente).subscribe(
+      () => {
+        this.obtenerDocentes(); // 🔄 Recargar la lista de docentes
+      },
+      (error) => {
+        console.error('❌ Error al agregar el docente:', error);
+      }
+    );
+  }
+
+  // ✅ Actualizar un docente existente
+  actualizarDocente(docente: IDocente): void {
     const dialogRef = this.dialog.open(DocentesDialogComponent, {
-      //width: '400px',
-      data: { ...docentes }
+      width: '400px',
+      data: { ...docente } // Pasamos una copia del objeto para evitar modificar directamente
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result && result.nombre && result.apellido && result.correo && result.telefono) {
-        const index = this.docentes.findIndex(a => a.id === result.id);
-        if (index > -1) {
-          this.docentes[index] = result;
-          this.dataSource.data = this.docentes; // Actualizar el dataSource
-        }
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.obtenerDocentes(); // 🔄 Recargar la lista después de editar
       }
     });
   }
 
-  // Método para eliminar un gestor
+
+  // ✅ Eliminar un docente
   eliminarDocente(id: number): void {
-    this.docentes = this.docentes.filter(docentes => docentes.id !== id);
-    this.dataSource.data = this.docentes; // Actualizar el dataSource
+    this.docenteService.deleteDocente(id).subscribe(
+      () => {
+        this.obtenerDocentes(); // 🔄 Recargar la lista de docentes
+      },
+      (error) => {
+        console.error('❌ Error al eliminar el docente:', error);
+      }
+    );
   }
 
-  // Método para aplicar el filtro
+  // ✅ Filtrar docentes en la tabla
   applyFilter(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
+    if (this.dataSource.paginator) this.dataSource.paginator.firstPage();
   }
 }

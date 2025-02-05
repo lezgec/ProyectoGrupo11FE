@@ -1,1 +1,58 @@
-<p>home works!</p>
+
+  <div>
+  <h1>Dashboard</h1>
+
+  <mat-grid-list cols="2" rowHeight="2:1">
+    <!-- Propuestas -->
+    <mat-grid-tile>
+      <mat-card class="card propuestas">
+        <mat-card-header>
+          <mat-icon>description</mat-icon>
+          <mat-card-title>Propuestas</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <h2>{{ totalPropuestas }}</h2>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <!-- Alumnos -->
+    <mat-grid-tile>
+      <mat-card class="card alumnos">
+        <mat-card-header>
+          <mat-icon>school</mat-icon>
+          <mat-card-title>Alumnos</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <h2>{{ totalAlumnos }}</h2>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <!-- Docentes (Revisores) -->
+    <mat-grid-tile>
+      <mat-card class="card docentes">
+        <mat-card-header>
+          <mat-icon>person</mat-icon>
+          <mat-card-title>Revisores</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <h2>{{ totalRevisores }}</h2>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <!-- Docentes (Coordinadores) -->
+    <mat-grid-tile>
+      <mat-card class="card coordinadores">
+        <mat-card-header>
+          <mat-icon>group</mat-icon>
+          <mat-card-title>Coordinadores</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <h2>{{ totalCoordinadores }}</h2>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

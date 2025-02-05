@@ -1,29 +1,64 @@
-<h1 mat-dialog-title>{{ data.id ? 'Editar Docente' : 'Agregar Docente' }}</h1>
+<h1 mat-dialog-title>{{ isEditMode ? 'Editar Docente' : 'Agregar Docente' }}</h1>
+
 <div mat-dialog-content>
-  <form (ngSubmit)="onSubmit()">
+  <form [formGroup]="docenteForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Cédula</mat-label>
+      <input matInput formControlName="cedula" required>
+      <mat-error *ngIf="docenteForm.controls['cedula'].invalid && docenteForm.controls['cedula'].touched">
+        Cédula inválida (10 dígitos requeridos)
+      </mat-error>
+    </mat-form-field>
+
     <mat-form-field appearance="fill">
       <mat-label>Nombre</mat-label>
-      <input matInput [(ngModel)]="data.nombre" name="nombre" required>
+      <input matInput formControlName="nombre" required>
+      <mat-error *ngIf="docenteForm.controls['nombre'].invalid && docenteForm.controls['nombre'].touched">
+        Nombre requerido
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Apellido</mat-label>
-      <input matInput [(ngModel)]="data.apellido" name="apellido" required>
+      <input matInput formControlName="apellido" required>
+      <mat-error *ngIf="docenteForm.controls['apellido'].invalid && docenteForm.controls['apellido'].touched">
+        Apellido requerido
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Correo</mat-label>
-      <input matInput [(ngModel)]="data.correo" name="correo" required>
+      <input matInput formControlName="correo" required>
+      <mat-error *ngIf="docenteForm.controls['correo'].invalid && docenteForm.controls['correo'].touched">
+        Ingrese un correo válido
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Telefono</mat-label>
-      <input matInput [(ngModel)]="data.telefono" name="telefono" required>
+      <mat-label>Teléfono</mat-label>
+      <input matInput formControlName="telefono">
+      <mat-error *ngIf="docenteForm.controls['telefono'].invalid && docenteForm.controls['telefono'].touched">
+        Teléfono inválido (10 dígitos requeridos)
+      </mat-error>
     </mat-form-field>
 
-    <div mat-dialog-actions>
-      <button mat-button (click)="onCancel()">Cancelar</button>
-      <button mat-button color="primary" type="submit">Guardar</button>
-    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Rol</mat-label>
+      <mat-select formControlName="rol" required>
+        <mat-option value="Revisor">Revisor</mat-option>
+        <mat-option value="Coordinador">Coordinador</mat-option>
+      </mat-select>
+    </mat-form-field>
   </form>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-button color="primary" (click)="onSubmit()" [disabled]="docenteForm.invalid">
+    {{ isEditMode ? 'Actualizar' : 'Guardar' }}
+  </button>
 </div>

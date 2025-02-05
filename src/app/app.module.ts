@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,6 +24,7 @@ import { MatCardModule} from '@angular/material/card';
 import { MatTreeModule} from '@angular/material/tree';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 import { AlumnosComponent } from './components/alumnos/alumnos.component';
@@ -78,7 +81,9 @@ import { RevisorDePropuestasComponent } from './components/revisor-de-propuestas
     MatButtonModule,
     MatIconModule,
     MatRadioModule,
-    MatExpansionModule
+    MatExpansionModule,
+    HttpClientModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,19 +1,19 @@
-import { IAlumno } from "./alumno.model";
-import { IDocente } from "./docente.model";
-import { IHistorial } from "./historialPropuesta.model";
-export interface IPropuesta{
+export interface IPropuesta {
+  id: number;
+  titulo: string;
+  definicion: string;
+  archivo: string;
+  isDeleted?: boolean;
+  deletedAt?: Date;
+  estado?: string;
+  fechasubida?: Date;
+  fechaModificacion?: Date;
+  observaciones?: string;
 
-    id: number,
-    titulo: string,
-    definicion: string,
-    archivo: string,
-    alumnosAsignado?: IAlumno[],
-    isDeleted?: boolean,
-    deletedAt?: Date,
-    estado?: string,
-    revisorAsignado?: IDocente,
-    fechasubida?: Date,
-    fechaModificacion?: Date,
-    observaciones?: string,
-    historial?: IHistorial[],
-  }
+  // Relación con alumnos (guardamos solo IDs)
+  alumno1Id?: number;
+  alumno2Id?: number;
+
+  // Relación con revisor (gestor/docente)
+  revisorId?: number;
+}

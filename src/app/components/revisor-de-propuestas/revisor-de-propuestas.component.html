@@ -1,38 +1,43 @@
 <div class="mat-app-background basic-container">
-<h2>Revisión de Propuestas</h2>
+  <h2>Revisión de Propuestas</h2>
 
-<!-- Expansion Panel -->
-<mat-accordion>
-  <mat-expansion-panel *ngFor="let propuesta of propuestas">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        {{ propuesta.titulo }}
-      </mat-panel-title>
-    </mat-expansion-panel-header>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let propuesta of propuestas">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ propuesta.titulo }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
 
-    <div class="contenido-revision">
-      <!-- Enlace al archivo de la propuesta -->
-      <p><strong>Archivo:</strong> <a [href]="propuesta.archivo" target="_blank">Ver Propuesta</a></p>
+      <div class="contenido-revision">
+        <p><strong>📄 Archivo:</strong> <a [href]="propuesta.archivo" target="_blank">Ver Propuesta</a></p>
 
-      <!-- Selector de Estado -->
-      <mat-form-field appearance="fill">
-        <mat-label>Estado</mat-label>
-        <mat-select [(ngModel)]="propuesta.estado">
-          <mat-option value="Aprobado">Aprobado</mat-option>
-          <mat-option value="Rechazado">Rechazado</mat-option>
-          <mat-option value="En Revisión">En Revisión</mat-option>
-        </mat-select>
-      </mat-form-field>
+        <!-- Mostrar Alumnos -->
+        <p *ngIf="propuesta.alumno1Id || propuesta.alumno2Id">
+          <strong>👨‍🎓 Alumnos:</strong>
+          {{ propuesta.alumno1Id ? getAlumnoNombre(propuesta.alumno1Id) : '' }}
+          {{ propuesta.alumno2Id ? ' - ' + getAlumnoNombre(propuesta.alumno2Id) : '' }}
+        </p>
 
-      <!-- Comentario -->
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Observaciones</mat-label>
-        <textarea matInput [(ngModel)]="propuesta.observaciones"></textarea>
-      </mat-form-field>
+        <!-- Selector de Estado -->
+        <mat-form-field appearance="fill">
+          <mat-label>Estado</mat-label>
+          <mat-select [(ngModel)]="propuesta.estado">
+            <mat-option value="Aprobado">Aprobado</mat-option>
+            <mat-option value="Rechazado">Rechazado</mat-option>
+            <mat-option value="En Revisión">En Revisión</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-      <!-- Botón Guardar -->
-      <button mat-raised-button color="primary" (click)="guardarRevision(propuesta)">Guardar Revisión</button>
-    </div>
-  </mat-expansion-panel>
-</mat-accordion>
+        <!-- Comentario -->
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Observaciones</mat-label>
+          <textarea matInput [(ngModel)]="propuesta.observaciones"></textarea>
+        </mat-form-field>
+
+        <!-- Botón Guardar -->
+        <button mat-raised-button color="primary" (click)="guardarRevision(propuesta)">Guardar Revisión</button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>

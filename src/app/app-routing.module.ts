@@ -5,6 +5,7 @@ import { CoordinadorDeRevisionComponent } from './components/coordinador-de-revi
 import { DocentesComponent } from './components/docentes/docentes.component';
 import { SecretariaComponent } from './components/secretaria/secretaria.component';
 import { RevisorDePropuestasComponent } from './components/revisor-de-propuestas/revisor-de-propuestas.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   { path: 'alumnos', component: AlumnosComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'coordinador-de-revision', component: CoordinadorDeRevisionComponent },
   { path: 'docentes', component: DocentesComponent },
   { path: 'secretaria', component:SecretariaComponent },
+  { path: 'home', component: HomeComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 

@@ -1,4 +1,4 @@
-<h1>Cordinador De Revision</h1>
+<h1>Coordinador De Revisión</h1>
 <div class="mat-app-background basic-container">
 
   <!-- Contenedor para centrar los botones -->
@@ -13,16 +13,21 @@
       <!-- Columna para Docentes -->
       <ng-container matColumnDef="docente">
         <th mat-header-cell *matHeaderCellDef> Docente </th>
-        <td mat-cell *matCellDef="let docente"> {{ docente.nombre }} </td>
+        <td mat-cell *matCellDef="let docente"> {{ docente.nombre }} {{ docente.apellido }} </td>
       </ng-container>
 
       <!-- Columna para Propuestas -->
       <ng-container matColumnDef="propuesta">
         <th mat-header-cell *matHeaderCellDef> Propuesta </th>
         <td mat-cell *matCellDef="let docente">
-          <mat-select [(value)]="docente.propuesta" placeholder="Seleccionar propuesta">
-            <mat-option *ngFor="let propuesta of propuestas" [value]="propuesta">{{ propuesta.titulo }}</mat-option>
-          </mat-select>
+          <mat-form-field appearance="fill">
+            <mat-label>Seleccionar Propuesta</mat-label>
+            <mat-select [(ngModel)]="docente.propuestasId">
+              <mat-option *ngFor="let propuesta of propuestas" [value]="propuesta.id">
+                {{ propuesta.titulo }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </td>
       </ng-container>
 
@@ -30,12 +35,12 @@
       <ng-container matColumnDef="acciones">
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
         <td mat-cell *matCellDef="let docente">
-          <button mat-button color="primary" (click)="guardar(docente)">Guardar</button>
+          <button mat-button color="primary" (click)="guardar(docente,docente.propuestasId)">Guardar</button>
         </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-header-row *matHeaderRowDef="['docente', 'propuesta', 'acciones']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['docente', 'propuesta', 'acciones'];"></tr>
     </table>
   </div>
 
